@@ -1,0 +1,104 @@
+<%- include('./header.ejs', {path: '../'}); %>
+	<a id="start"></a>
+	<section class="bar bar-3 bar--sm bg--secondary">
+		<div class="container">
+			<div class="row">
+				<form>
+			<div class="row">
+				<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+					<input id="search" type="search" name="query" placeholder="Type search query" />
+				</div>
+			</div>
+			<!--end of row-->
+		</form>
+			</div>
+			<!--end of row-->
+		</div>
+		<!--end of container-->
+	</section>
+	<!--end bar-->
+	<div class="main-container">
+		<section>
+	        <div class="container">
+	            <div class="row">
+	                <div class="col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+	                    <article>
+	                        <div class="article__title text-center">
+	                            <h1 id="title" class="h2"><%= book.title %></h1>
+	                            <span id="author"><%= book.author %></span>
+	                        </div>
+	                        <!--end article title-->
+	                        <div class="article__body">
+	                            <img id="image" alt="Image" src="<%= book.imgLink %>" />
+	                            <p id="description"><%= book.description %></p>
+	                        </div>
+	                    </article>
+	                    <!--end item-->
+	                </div>
+	            </div>
+	            <!--end of row-->
+	        </div>
+	        <!--end of container-->
+	    </section>
+		<p id="host" hidden></p>
+
+
+			<footer class="footer-3 text-center-xs space--xs ">
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-6">
+							<ul class="list-inline list--hover">
+								<li>
+									<span class="">0557996009</span>
+								</li>
+								<li>
+									<span class="">talantbekov123@gmail.com</span>
+								</li>
+							</ul>
+						</div>
+						<div class="col-sm-6 text-right text-center-xs">
+							<ul class="social-list list-inline list--hover">
+								<li>
+									<a href="https://github.com/talantbekov123" target="_blank">
+										<i class="socicon socicon-github icon icon--xs"></i>
+									</a>
+								</li>
+								<li>
+									<a href="https://www.facebook.com/SecretSpyUser" target="_blank">
+										<i class="socicon socicon-facebook icon icon--xs"></i>
+									</a>
+								</li>
+								<li>
+									<a href="https://www.instagram.com/talantbekov_kairat/" target="_blank">
+										<i class="socicon socicon-instagram icon icon--xs"></i>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					
+					<!--end of row-->
+				</div>
+				<!--end of container-->
+			</footer>
+		</div>
+		<!--<div class="loader"></div>-->
+		<a class="back-to-top inner-link" href="#start" data-scroll-class="100vh:active">
+			<i class="stack-interface stack-up-open-big"></i>
+		</a>
+		<script src="../js/jquery-3.1.1.min.js"></script>
+
+		<script type="text/javascript">
+			var url = document.URL
+			var elems = url.split('/')
+			console.log(elems)
+			var id = elems[elems.length - 1]
+			$.get("/get/book/" + id, function(data, status){
+				document.getElementById("title").innerHTML = data.title;
+				document.getElementById("author").innerHTML = data.author;
+				document.getElementById("description").innerHTML = data.description;
+				console.log(data.image)
+				document.getElementById("image").src = '../img/' + data.image;
+			})
+		</script>
+<%- include('./footer.ejs', {path: '../'}); %>
